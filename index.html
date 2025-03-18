@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi", body {height: 100vh; /* Đảm bảo chiều cao luôn vừa với màn hình */
+   			overflow: hidden; /* Ngăn trang web cuộn */
+    			margin: 0;
+    			padding: 0;}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,11 +71,7 @@
     </style>
 </head>
 <body>
-	height: 100vh; /* Đảm bảo chiều cao luôn vừa với màn hình */
-   	overflow: hidden; /* Ngăn trang web cuộn */
-    	margin: 0;
-    	padding: 0;
-    <div class="sidebar">
+        <div class="sidebar">
         <h2>VITECO - Ứng dụng</h2>
         <a onclick="loadApp('https://onedrive.live.com/?id=root&cid=AA95F7AB817F7EE3')">OneDrive</a>
         <a onclick="loadApp('https://web.telegram.org/a/')">Telegram</a>
