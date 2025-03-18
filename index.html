@@ -21,9 +21,10 @@
         }
         iframe {
             width: 100%;
-            height: 100vh;
+            height: calc(100vh - 10px);
             border: none;
             display: none; /* Ban đầu ẩn iFrame */
+            overflow: hidden;
         }
         .welcome {
             display: block; /* Hiển thị màn hình chào mừng ban đầu */
@@ -78,7 +79,7 @@
         <a onclick="loadApp('https://docs.google.com/spreadsheets/d/17KIedPOTqwBnzG_HwD309kV7CE7tyYmiKPnhdw4UQ0A/edit?gid=0#gid=0', true)">P. KINH DOANH</a>
         <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1oiRubZvntAFbWE6k1I4j9i_MxDtvvAkzvQCbFVmkcSM/edit?gid=0#gid=0', true)">P. NGHIỆP VỤ</a>
         <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1rvshmh9o8_sfzP4-uc1TwojMjRZIKX0HSUMn1MTV15E/edit?gid=0#gid=0', true)">P. TÀI CHÍNH</a>
-        <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1rvshmh9o8_sfzP4-uc1TwojMjRZIKX0HSUMn1MTV15E/edit?gid=0#gid=0', true)">P. SẢN PHẨM</a>
+        <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1rlu3x1YmocJ5muYgOkSmH8K-LsTqxGy00OkXb06GWvw/edit?pli=1&gid=73368914#gid=73368914', true)">P. SẢN PHẨM</a>
     </div>
    <div class="content" id="contentContainer">
         <div class="welcome" id="welcomeScreen">
