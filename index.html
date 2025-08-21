@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VITECO ERP</title>
-  <!-- Font Awesome CDN -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <style>
     html, body {
       margin: 0;
@@ -34,10 +32,15 @@
       align-items: center;
       border-radius: 5px;
       cursor: pointer;
-      gap: 10px; /* khoảng cách icon và chữ */
+      gap: 10px;
     }
     .sidebar a:hover {
       background: #34495E;
+    }
+    .sidebar img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
     }
     .content {
       flex-grow: 1;
@@ -67,17 +70,37 @@
 </head>
 <body>
   <div class="sidebar">
-    <h2>VITECO - Ứng dụng</h2>
-    <a onclick="loadApp('https://onedrive.live.com/?id=root&cid=AA95F7AB817F7EE3')"><i class="fa-solid fa-cloud"></i> OneDrive</a>
-    <a onclick="loadApp('https://zalo.me/pc')"><i class="fa-solid fa-comments"></i> Zalo</a>
-    <a onclick="loadApp('https://trello.com/b/tGfn4EHl/p-x%E1%BB%AD-ly-d%C6%A1n-hang')"><i class="fa-brands fa-trello"></i> Trello</a>
-    <a onclick="loadApp('https://mail.zoho.com/zm/#mail/folder/inbox')"><i class="fa-solid fa-envelope"></i> Email</a>
-    <a onclick="loadApp('https://chatgpt.com/')"><i class="fa-solid fa-robot"></i> AI - DUKT</a>
-    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/17KIedPOTqwBnzG_HwD309kV7CE7tyYmiKPnhdw4UQ0A/edit?gid=0#gid=0', true)"><i class="fa-solid fa-table"></i> P. KINH DOANH</a>
-    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1oiRubZvntAFbWE6k1I4j9i_MxDtvvAkzvQCbFVmkcSM/edit?gid=0#gid=0', true)"><i class="fa-solid fa-table"></i> P. NGHIỆP VỤ</a>
-    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1rvshmh9o8_sfzP4-uc1TwojMjRZIKX0HSUMn1MTV15E/edit?gid=0#gid=0', true)"><i class="fa-solid fa-table"></i> P. TÀI CHÍNH</a>
-    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1Jz3Z3KttwClumWtLxm8zeM9mk88qESkSL4_b3iQJOto/edit?gid=0#gid=0', true)"><i class="fa-solid fa-table"></i> P. SẢN PHẨM</a>
-    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1w4QcCjz7uoXw2xkc4qK7lgZVDXYXAb2FIza1UJOyWIk/edit?gid=0#gid=0', true)"><i class="fa-solid fa-table"></i> Sale admin</a>
+    <h2>VITECO - App</h2>
+    <a onclick="loadApp('https://onedrive.live.com/?id=root&cid=AA95F7AB817F7EE3')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Microsoft_Office_OneDrive_%282019–present%29.svg" alt="OneDrive"> OneDrive
+    </a>
+    <a onclick="loadApp('https://zalo.me/pc')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo"> Zalo
+    </a>
+    <a onclick="loadApp('https://trello.com/b/tGfn4EHl/p-x%E1%BB%AD-ly-d%C6%A1n-hang')">
+      <img src="https://cdn.worldvectorlogo.com/logos/trello.svg" alt="Trello"> Trello
+    </a>
+    <a onclick="loadApp('https://mail.zoho.com/zm/#mail/folder/inbox')">
+      <img src="https://seeklogo.com/images/Z/zoho-mail-logo-7E6FEECD08-seeklogo.com.png" alt="Zoho Mail"> Email
+    </a>
+    <a onclick="loadApp('https://chatgpt.com/')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT"> AI - Product
+    </a>
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/17KIedPOTqwBnzG_HwD309kV7CE7tyYmiKPnhdw4UQ0A/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. KINH DOANH
+    </a>
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1oiRubZvntAFbWE6k1I4j9i_MxDtvvAkzvQCbFVmkcSM/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. NGHIỆP VỤ
+    </a>
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1rvshmh9o8_sfzP4-uc1TwojMjRZIKX0HSUMn1MTV15E/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. TÀI CHÍNH
+    </a>
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1Jz3Z3KttwClumWtLxm8zeM9mk88qESkSL4_b3iQJOto/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. SẢN PHẨM
+    </a>
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1w4QcCjz7uoXw2xkc4qK7lgZVDXYXAb2FIza1UJOyWIk/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> Sale admin
+    </a>
   </div>
   
   <div class="content" id="contentContainer">
