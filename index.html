@@ -1,102 +1,105 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VITECO ERP</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden; /* Ngăn cuộn */
-            font-family: Arial, sans-serif;
-        }
-        body {
-            display: flex;
-        }
-        .sidebar {
-            width: 250px;
-            background: #2C3E50;
-            color: white;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
-        }
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            padding: 15px;
-            display: block;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .sidebar a:hover {
-            background: #34495E;
-        }
-        .content {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #ECF0F1;
-            flex-direction: column;
-            text-align: center;
-            height: 100vh;
-            box-sizing: border-box;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: none;
-        }
-        .welcome {
-            display: block;
-        }
-        .welcome img {
-            max-width: 400px;
-            margin-bottom: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VITECO ERP</title>
+  <!-- Font Awesome CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      display: flex;
+    }
+    .sidebar {
+      width: 250px;
+      background: #2C3E50;
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+      cursor: pointer;
+      gap: 10px; /* khoảng cách icon và chữ */
+    }
+    .sidebar a:hover {
+      background: #34495E;
+    }
+    .content {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ECF0F1;
+      flex-direction: column;
+      text-align: center;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+    }
+    .welcome {
+      display: block;
+    }
+    .welcome img {
+      max-width: 400px;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
-    <div class="sidebar">
-        <h2>VITECO - Ứng dụng</h2>
-        <a onclick="loadApp('https://onedrive.live.com/?id=root&cid=AA95F7AB817F7EE3')">OneDrive</a>
-        <a onclick="loadApp('https://zalo.me/pc')">Zalo</a>
-        <a onclick="loadApp('https://trello.com/b/tGfn4EHl/p-x%E1%BB%AD-ly-d%C6%A1n-hang')">Trello</a>
-        <a onclick="loadApp('https://mail.zoho.com/zm/#mail/folder/inbox')">Email</a>
-        <a onclick="loadApp('https://chatgpt.com/')">AI - DUKT </a>
-        <a onclick="loadApp('https://docs.google.com/spreadsheets/d/17KIedPOTqwBnzG_HwD309kV7CE7tyYmiKPnhdw4UQ0A/edit?gid=0#gid=0', true)">P. KINH DOANH</a>
-        <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1oiRubZvntAFbWE6k1I4j9i_MxDtvvAkzvQCbFVmkcSM/edit?gid=0#gid=0', true)">P. NGHIỆP VỤ</a>
-        <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1rvshmh9o8_sfzP4-uc1TwojMjRZIKX0HSUMn1MTV15E/edit?gid=0#gid=0', true)">P. TÀI CHÍNH</a>
-        <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1Jz3Z3KttwClumWtLxm8zeM9mk88qESkSL4_b3iQJOto/edit?gid=0#gid=0', true)">P. SẢN PHẨM</a>
-        <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1w4QcCjz7uoXw2xkc4qK7lgZVDXYXAb2FIza1UJOyWIk/edit?gid=0#gid=0', true)">Sale admin</a>  
+  <div class="sidebar">
+    <h2>VITECO - Ứng dụng</h2>
+    <a onclick="loadApp('https://onedrive.live.com/?id=root&cid=AA95F7AB817F7EE3')"><i class="fa-solid fa-cloud"></i> OneDrive</a>
+    <a onclick="loadApp('https://zalo.me/pc')"><i class="fa-solid fa-comments"></i> Zalo</a>
+    <a onclick="loadApp('https://trello.com/b/tGfn4EHl/p-x%E1%BB%AD-ly-d%C6%A1n-hang')"><i class="fa-brands fa-trello"></i> Trello</a>
+    <a onclick="loadApp('https://mail.zoho.com/zm/#mail/folder/inbox')"><i class="fa-solid fa-envelope"></i> Email</a>
+    <a onclick="loadApp('https://chatgpt.com/')"><i class="fa-solid fa-robot"></i> AI - DUKT</a>
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/17KIedPOTqwBnzG_HwD309kV7CE7tyYmiKPnhdw4UQ0A/edit?gid=0#gid=0', true)"><i class="fa-solid fa-table"></i> P. KINH DOANH</a>
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1oiRubZvntAFbWE6k1I4j9i_MxDtvvAkzvQCbFVmkcSM/edit?gid=0#gid=0', true)"><i class="fa-solid fa-table"></i> P. NGHIỆP VỤ</a>
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1rvshmh9o8_sfzP4-uc1TwojMjRZIKX0HSUMn1MTV15E/edit?gid=0#gid=0', true)"><i class="fa-solid fa-table"></i> P. TÀI CHÍNH</a>
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1Jz3Z3KttwClumWtLxm8zeM9mk88qESkSL4_b3iQJOto/edit?gid=0#gid=0', true)"><i class="fa-solid fa-table"></i> P. SẢN PHẨM</a>
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1w4QcCjz7uoXw2xkc4qK7lgZVDXYXAb2FIza1UJOyWIk/edit?gid=0#gid=0', true)"><i class="fa-solid fa-table"></i> Sale admin</a>
+  </div>
+  
+  <div class="content" id="contentContainer">
+    <div class="welcome" id="welcomeScreen">
+      <img src="https://c1nguyendu.pgdcujut.edu.vn/wp-content/uploads/2022/07/nhung-hinh-nen-powerpoint-mo-dau-dep-va-an-tuong-nhat-670712.jpg" alt="Welcome Image">
+      <h2>Welcome to VITECO team 2025!</h2>
+      <p>Chọn một ứng dụng từ danh sách bên trái để bắt đầu làm việc.</p>
     </div>
+    <iframe id="appFrame" src=""></iframe>
+  </div>
 
-    <div class="content" id="contentContainer">
-        <div class="welcome" id="welcomeScreen">
-            <img src="https://c1nguyendu.pgdcujut.edu.vn/wp-content/uploads/2022/07/nhung-hinh-nen-powerpoint-mo-dau-dep-va-an-tuong-nhat-670712.jpg" alt="Welcome Image">
-            <h2>Welcome to VITECO team 2025!</h2>
-            <p>Chọn một ứng dụng từ danh sách bên trái để bắt đầu làm việc.</p>
-        </div>
-        <iframe id="appFrame" src=""></iframe>
-    </div>
-
-    <script>
-        function loadApp(url, useIframe) {
-            document.getElementById('welcomeScreen').style.display = 'none';
-            let frame = document.getElementById('appFrame');
-
-            if (useIframe) {
-                frame.src = url;
-                frame.style.display = 'block';
-            } else {
-                window.open(url, '_blank');
-            }
-        }
-    </script>
+  <script>
+    function loadApp(url, useIframe) {
+      document.getElementById('welcomeScreen').style.display = 'none';
+      let frame = document.getElementById('appFrame');
+      if (useIframe) {
+        frame.src = url;
+        frame.style.display = 'block';
+      } else {
+        window.open(url, '_blank');
+      }
+    }
+  </script>
 </body>
 </html>
