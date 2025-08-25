@@ -1,137 +1,151 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>VITECO ERP</title>
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
+      margin: 0; padding: 0; height: 100%;
+      overflow: hidden; font-family: Arial, sans-serif;
     }
-    body {
-      display: flex;
-    }
+    body { display: flex; }
+
+    /* Sidebar */
     .sidebar {
       width: 250px;
       background: #2C3E50;
-      color: white;
+      color: #fff;
       padding: 20px;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
       transition: width 0.3s ease;
     }
-    .sidebar.collapsed {
-      width: 60px; /* khi thu nhỏ */
-      overflow: hidden;
+    .sidebar.hidden {
+      width: 0; padding: 0;
+      overflow: hidden; pointer-events: none;
     }
-    .sidebar h2 {
-      font-size: 18px;
-      margin-bottom: 20px;
-      transition: opacity 0.3s ease;
-    }
-    .sidebar.collapsed h2 {
-      opacity: 0;
-    }
+    .sidebar h2 { font-size: 18px; margin: 0 0 20px; }
     .sidebar a {
-      color: white;
-      text-decoration: none;
-      padding: 12px;
-      display: flex;
-      align-items: center;
-      border-radius: 5px;
-      cursor: pointer;
-      gap: 10px;
-      white-space: nowrap;
-      transition: gap 0.3s ease, padding 0.3s ease;
+      color: #fff; text-decoration: none;
+      padding: 12px; display: flex; align-items: center;
+      border-radius: 5px; cursor: pointer; gap: 10px; white-space: nowrap;
     }
-    .sidebar.collapsed a {
-      justify-content: center;
-      gap: 0;
-      padding: 12px 0;
-    }
-    .sidebar img {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-    }
+    .sidebar a:hover { background: #34495E; }
+    .sidebar img { width: 20px; height: 20px; object-fit: contain; }
+
+    /* Content */
     .content {
-      flex-grow: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #ECF0F1;
-      flex-direction: column;
-      text-align: center;
-      height: 100vh;
-      box-sizing: border-box;
-      position: relative;
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      background: #ECF0F1; flex-direction: column; text-align: center;
+      height: 100vh; box-sizing: border-box; position: relative;
     }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: none;
-    }
-    .welcome {
-      display: block;
-    }
-    .welcome img {
-      max-width: 400px;
-      margin-bottom: 20px;
-    }
-    /* nút toggle */
+    iframe { width: 100%; height: 100%; border: none; display: none; }
+    .welcome { display: block; }
+    .welcome img { max-width: 400px; margin-bottom: 20px; }
+
+    /* Nút toggle giữa mép trái màn hình */
     .toggle-btn {
       position: absolute;
-      top: 10px;
-      left: 260px;
+      top: 50%;
+      left: 250px;              /* bằng chiều rộng sidebar khi mở */
+      transform: translateY(-50%);
       background: #2C3E50;
-      color: white;
+      color: #fff;
       border: none;
-      padding: 6px 10px;
+      padding: 8px 10px;
       cursor: pointer;
-      border-radius: 5px;
-      transition: left 0.3s ease;
+      border-radius: 0 6px 6px 0;
+      transition: left 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-radius 0.3s ease;
       z-index: 1000;
+
+      /* bóng mờ mặc định */
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
-    .collapsed + .content .toggle-btn {
-      left: 70px;
+    /* Khi sidebar ẩn: nút dính sát mép trái và bo tròn đều */
+    .sidebar.hidden + .content .toggle-btn {
+      left: 0;
+      border-radius: 6px;
+    }
+    /* Hiệu ứng hover cho nút */
+    .toggle-btn:hover {
+      background: #34495E;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    /* Nhỏ hơn 768px: thu gọn chút giao diện */
+    @media (max-width: 768px) {
+      .sidebar { width: 220px; }
+      .toggle-btn { left: 220px; }
+      .sidebar.hidden + .content .toggle-btn { left: 0; }
     }
   </style>
 </head>
 <body>
   <div class="sidebar" id="sidebar">
     <h2>VITECO - App</h2>
-    <a onclick="loadApp('https://onedrive.com')">
+
+    <a onclick="loadApp('https://onedrive.live.com', false)">
       <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Microsoft_Office_OneDrive_%282019%E2%80%93present%29.svg" alt="OneDrive"> OneDrive
     </a>
-    <a onclick="loadApp('https://zalo.me/pc')">
+
+    <a onclick="loadApp('https://zalo.me/pc', false)">
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo"> Zalo
     </a>
-    <a onclick="loadApp('https://trello.com')">
+
+    <a onclick="loadApp('https://trello.com/b/tGfn4EHl/p-x%E1%BB%AD-ly-d%C6%A1n-hang', false)">
       <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Font_Awesome_5_brands_trello.svg" alt="Trello"> Trello
     </a>
-    <!-- thêm các menu khác ở đây -->
+
+    <a onclick="loadApp('https://mail.zoho.com/zm/#mail/folder/inbox', false)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Zoho_Mail-256.png" alt="Zoho Mail"> Email (Zoho)
+    </a>
+
+    <a onclick="loadApp('https://chatgpt.com/g/g-68a719c872d881919ab8cc70c6f2ec98-visan', false)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT"> AI - VISAN
+    </a>
+
+    <!-- Google Sheets (mở trong iframe) -->
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/17KIedPOTqwBnzG_HwD309kV7CE7tyYmiKPnhdw4UQ0A/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. KINH DOANH
+    </a>
+
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1oiRubZvntAFbWE6k1I4j9i_MxDtvvAkzvQCbFVmkcSM/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. NGHIỆP VỤ
+    </a>
+
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1rvshmh9o8_sfzP4-uc1TwojMjRZIKX0HSUMn1MTV15E/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. TÀI CHÍNH
+    </a>
+
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1Jz3Z3KttwClumWtLxm8zeM9mk88qESkSL4_b3iQJOto/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. SẢN PHẨM
+    </a>
+
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1w4QcCjz7uoXw2xkc4qK7lgZVDXYXAb2FIza1UJOyWIk/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> z_Sale admin
+    </a>
   </div>
-  
+
   <div class="content" id="contentContainer">
-    <button class="toggle-btn" onclick="toggleSidebar()">&#9664;</button>
+    <button class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()" aria-label="Ẩn/Hiện menu">&#9664;</button>
+
     <div class="welcome" id="welcomeScreen">
       <img src="https://c1nguyendu.pgdcujut.edu.vn/wp-content/uploads/2022/07/nhung-hinh-nen-powerpoint-mo-dau-dep-va-an-tuong-nhat-670712.jpg" alt="Welcome Image">
       <h2>Welcome to VITECO team 2025!</h2>
       <p>Chọn một ứng dụng từ danh sách bên trái để bắt đầu làm việc.</p>
     </div>
+
     <iframe id="appFrame" src=""></iframe>
   </div>
 
   <script>
     function loadApp(url, useIframe) {
+      // Ẩn màn hình welcome
       document.getElementById('welcomeScreen').style.display = 'none';
-      let frame = document.getElementById('appFrame');
+
+      const frame = document.getElementById('appFrame');
       if (useIframe) {
         frame.src = url;
         frame.style.display = 'block';
@@ -141,15 +155,28 @@
     }
 
     function toggleSidebar() {
-      let sidebar = document.getElementById('sidebar');
-      let btn = document.querySelector('.toggle-btn');
-      sidebar.classList.toggle('collapsed');
-      if (sidebar.classList.contains('collapsed')) {
-        btn.innerHTML = '&#9654;'; // mũi tên phải
-      } else {
-        btn.innerHTML = '&#9664;'; // mũi tên trái
-      }
+      const sidebar = document.getElementById('sidebar');
+      const btn = document.getElementById('toggleBtn');
+      sidebar.classList.toggle('hidden');
+      const hidden = sidebar.classList.contains('hidden');
+
+      // Đổi biểu tượng mũi tên
+      btn.innerHTML = hidden ? '&#9654;' : '&#9664;';
+
+      // Ghi nhớ trạng thái (tùy chọn)
+      try { localStorage.setItem('viteco_sidebar_hidden', hidden ? '1' : '0'); } catch(e){}
     }
+
+    // Khởi động: khôi phục trạng thái ẩn/hiện nếu có
+    (function initSidebarState(){
+      try {
+        const saved = localStorage.getItem('viteco_sidebar_hidden');
+        if (saved === '1') {
+          document.getElementById('sidebar').classList.add('hidden');
+          document.getElementById('toggleBtn').innerHTML = '&#9654;';
+        }
+      } catch(e){}
+    })();
   </script>
 </body>
 </html>
