@@ -79,59 +79,6 @@
       .sidebar { width: 220px; }
       .toggle-btn { left: 220px; }
       .sidebar.hidden + .content .toggle-btn { left: 0; }
-      /* Fix welcome layout để không cần lăn */
-/* ===== WELCOME + CHART (áp dụng mọi màn hình) ===== */
-#welcomeScreen{
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 14px 18px;
-  box-sizing: border-box;
-  text-align: center;
-  overflow: hidden;   /* không scroll toàn trang */
-}
-
-#welcomeScreen .banner{
-  max-width: 260px;   /* banner nhỏ hơn */
-  width: 66%;
-  height: auto;
-  margin: 0 0 8px 0;
-}
-
-#welcomeScreen h2{ margin: 0; }
-#welcomeScreen p{ margin: 6px 0 10px 0; }
-
-#welcomeScreen .chart-box{
-  width: min(1400px, 96%); /* TO hơn nhiều (≈ 2–3 lần) */
-  flex: 1;
-  min-height: 70vh;        /* cao hơn, gần full màn hình */
-  max-height: calc(100vh - 220px); /* chừa chỗ banner + text */
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;        /* không scroll bên trong box */
-  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
-}
-
-#welcomeScreen .chart-box iframe{
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block !important; /* đè rule ẩn iframe */
-}
-
-/* Laptop thấp: giảm chút để vẫn vừa màn */
-@media (max-height: 800px){
-  #welcomeScreen .banner{ max-width: 220px; }
-  #welcomeScreen .chart-box{
-    max-height: calc(100vh - 190px);
-    min-height: 62vh;
-  }
-}
-
-
     }
   </style>
 </head>
@@ -201,22 +148,38 @@
   <div class="content" id="contentContainer">
     <button class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()" aria-label="Ẩn/Hiện menu">&#9664;</button>
 
-<div class="welcome" id="welcomeScreen">
-  <img class="banner"
-       src="https://c1nguyendu.pgdcujut.edu.vn/wp-content/uploads/2022/07/nhung-hinh-nen-powerpoint-mo-dau-dep-va-an-tuong-nhat-670712.jpg"
-       alt="Welcome Image">
+   <div class="welcome" id="welcomeScreen">
+  <!-- Banner -->
+  <img
+    src="https://c1nguyendu.pgdcujut.edu.vn/wp-content/uploads/2022/07/nhung-hinh-nen-powerpoint-mo-dau-dep-va-an-tuong-nhat-670712.jpg"
+    alt="Welcome Image"
+    style="max-width:420px; width:90%; margin-bottom:16px;"
+  >
 
   <h2>Welcome to VITECO team 2025!</h2>
   <p>Chọn một ứng dụng từ danh sách bên trái để bắt đầu làm việc.</p>
 
-  <div class="chart-box">
-    <iframe
-      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4dgjAlduhY0ccFkTWZocK-CtTbxBG8lgt1dAj0biK9F1YEirPdqbcxd0WRkSU_UTWWJrkxFRTEHX/pubchart?oid=1966049928&format=interactive"
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-    ></iframe>
-  </div>
+  <!-- Chart -->
+  <div
+  style="
+    width:min(1100px,95vw);
+    height:420px;
+    margin:18px auto 0;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 2px 10px rgba(0,0,0,0.12);
+  "
+>
+  <iframe
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4dgjAlduhY0ccFkTWZocK-CtTbxBG8lgt1dAj0biK9F1YEirPdqbcxd0WRkSU_UTWWJrkxFRTEHX/pubchart?oid=1966049928&format=interactive"
+    style="width:100%; height:100%; border:0; display:block !important;"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
 </div>
+
+
 
     <iframe id="appFrame" src=""></iframe>
   </div>
@@ -261,8 +224,6 @@
   </script>
 </body>
 </html>
-
-
 
 
 
