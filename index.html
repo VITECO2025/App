@@ -79,6 +79,34 @@
       .sidebar { width: 220px; }
       .toggle-btn { left: 220px; }
       .sidebar.hidden + .content .toggle-btn { left: 0; }
+      /* Fix welcome layout để không cần lăn */
+#welcomeScreen{
+  height: calc(100vh - 40px);   /* chừa chút khoảng cho padding */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;  /* không canh giữa nữa */
+  gap: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+#welcomeScreen .chart-box{
+  width: min(1100px, 95vw);
+  flex: 1;                      /* ăn hết chiều cao còn lại */
+  min-height: 320px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+}
+#welcomeScreen .chart-box iframe{
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block !important;
+}
+
     }
   </style>
 </head>
@@ -148,37 +176,26 @@
   <div class="content" id="contentContainer">
     <button class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()" aria-label="Ẩn/Hiện menu">&#9664;</button>
 
-   <div class="welcome" id="welcomeScreen">
-  <!-- Banner -->
+<div class="welcome" id="welcomeScreen">
+  <!-- Banner (thu hẹp còn ~2/3) -->
   <img
     src="https://c1nguyendu.pgdcujut.edu.vn/wp-content/uploads/2022/07/nhung-hinh-nen-powerpoint-mo-dau-dep-va-an-tuong-nhat-670712.jpg"
     alt="Welcome Image"
-    style="max-width:420px; width:90%; margin-bottom:16px;"
+    style="max-width:280px; width:70%; margin:0;"
   >
 
-  <h2>Welcome to VITECO team 2025!</h2>
-  <p>Chọn một ứng dụng từ danh sách bên trái để bắt đầu làm việc.</p>
+  <h2 style="margin:0;">Welcome to VITECO team 2025!</h2>
+  <p style="margin:0;">Chọn một ứng dụng từ danh sách bên trái để bắt đầu làm việc.</p>
 
-  <!-- Chart -->
-  <div
-  style="
-    width:min(1100px,95vw);
-    height:420px;
-    margin:18px auto 0;
-    background:#fff;
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 2px 10px rgba(0,0,0,0.12);
-  "
->
-  <iframe
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4dgjAlduhY0ccFkTWZocK-CtTbxBG8lgt1dAj0biK9F1YEirPdqbcxd0WRkSU_UTWWJrkxFRTEHX/pubchart?oid=1966049928&format=interactive"
-    style="width:100%; height:100%; border:0; display:block !important;"
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"
-  ></iframe>
+  <!-- Chart (tự fit, không cần lăn) -->
+  <div class="chart-box">
+    <iframe
+      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4dgjAlduhY0ccFkTWZocK-CtTbxBG8lgt1dAj0biK9F1YEirPdqbcxd0WRkSU_UTWWJrkxFRTEHX/pubchart?oid=1966049928&format=interactive"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
 </div>
-
 
 
     <iframe id="appFrame" src=""></iframe>
@@ -224,6 +241,7 @@
   </script>
 </body>
 </html>
+
 
 
 
