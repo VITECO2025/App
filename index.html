@@ -4,20 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>VITECO ERP</title>
-
   <style>
     html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
+      margin: 0; padding: 0; height: 100%;
+      overflow: hidden; font-family: Arial, sans-serif;
     }
-    body {
-      display: flex;
-    }
+    body { display: flex; }
 
-    /* ========== SIDEBAR ========== */
+    /* Sidebar */
     .sidebar {
       width: 250px;
       background: #2C3E50;
@@ -28,76 +22,34 @@
       box-sizing: border-box;
       transition: width 0.3s ease;
     }
-
     .sidebar.hidden {
-      width: 0;
-      padding: 0;
-      overflow: hidden;
-      pointer-events: none;
+      width: 0; padding: 0;
+      overflow: hidden; pointer-events: none;
     }
-
-    .sidebar h2 {
-      font-size: 18px;
-      margin: 0 0 20px;
-    }
-
+    .sidebar h2 { font-size: 18px; margin: 0 0 20px; }
     .sidebar a {
-      color: #fff;
-      text-decoration: none;
-      padding: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      white-space: nowrap;
+      color: #fff; text-decoration: none;
+      padding: 12px; display: flex; align-items: center;
+      border-radius: 5px; cursor: pointer; gap: 10px; white-space: nowrap;
     }
+    .sidebar a:hover { background: #34495E; }
+    .sidebar img { width: 20px; height: 20px; object-fit: contain; }
 
-    .sidebar a:hover {
-      background: #34495E;
-    }
-
-    .sidebar img {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-    }
-
-    /* ========== CONTENT ========== */
+    /* Content */
     .content {
-      flex: 1;
-      background: #ECF0F1;
-      height: 100vh;
-      position: relative;
-      box-sizing: border-box;
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      background: #ECF0F1; flex-direction: column; text-align: center;
+      height: 100vh; box-sizing: border-box; position: relative;
     }
+    iframe { width: 100%; height: 100%; border: none; display: none; }
+    .welcome { display: block; }
+    .welcome img { max-width: 400px; margin-bottom: 20px; }
 
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: none;
-    }
-
-    /* ========== DASHBOARD (DEFAULT) ========== */
-    .dashboard {
-      width: 100%;
-      height: 100%;
-      display: block;
-      background: #ECF0F1;
-    }
-
-    .dashboard iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* ========== TOGGLE BUTTON ========== */
+    /* Nút toggle giữa mép trái màn hình */
     .toggle-btn {
       position: absolute;
       top: 50%;
-      left: 250px;
+      left: 0px;              /* bằng chiều rộng sidebar khi mở */
       transform: translateY(-50%);
       background: #2C3E50;
       color: #fff;
@@ -105,15 +57,24 @@
       padding: 8px 10px;
       cursor: pointer;
       border-radius: 0 6px 6px 0;
+      transition: left 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-radius 0.3s ease;
       z-index: 1000;
-      transition: left 0.3s ease;
-    }
 
+      /* bóng mờ mặc định */
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    /* Khi sidebar ẩn: nút dính sát mép trái và bo tròn đều */
     .sidebar.hidden + .content .toggle-btn {
       left: 0;
       border-radius: 6px;
     }
+    /* Hiệu ứng hover cho nút */
+    .toggle-btn:hover {
+      background: #34495E;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
 
+    /* Nhỏ hơn 768px: thu gọn chút giao diện */
     @media (max-width: 768px) {
       .sidebar { width: 220px; }
       .toggle-btn { left: 220px; }
@@ -121,87 +82,88 @@
     }
   </style>
 </head>
-
 <body>
-
-  <!-- ========== SIDEBAR ========== -->
   <div class="sidebar" id="sidebar">
     <h2>VITECO - App</h2>
 
     <a onclick="loadApp('https://onedrive.live.com', false)">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/OneDrive_icon.png"> OneDrive
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/OneDrive_icon.png" alt="OneDrive"> OneDrive
     </a>
 
     <a onclick="loadApp('https://oa.zalo.me/chat', false)">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"> Zalo
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo"> Zalo
     </a>
 
     <a onclick="loadApp('https://trello.com/b/tGfn4EHl/p-x%E1%BB%AD-ly-d%C6%A1n-hang', false)">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Font_Awesome_5_brands_trello.svg"> Trello
+      <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Font_Awesome_5_brands_trello.svg" alt="Trello"> Trello
     </a>
 
     <a onclick="loadApp('https://mail.zoho.com/zm/#mail/folder/inbox', false)">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Zoho_Mail-256.png"> Email (Zoho)
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Zoho_Mail-256.png" alt="Zoho Mail"> Email (Zoho)
     </a>
 
     <a onclick="loadApp('https://chatgpt.com/g/g-68a719c872d881919ab8cc70c6f2ec98-visan', false)">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg"> AI - VISAN
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT"> AI - VISAN
     </a>
 
-    <hr style="opacity:.3">
-
-    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1PHJFoQWp1v6f3Uok-NJyv_TQqqIXMUSBF6hZjQAiYrw/edit', true)">
-      📊 CEO
+        <!-- Google Sheets (mở trong iframe) -->
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1PHJFoQWp1v6f3Uok-NJyv_TQqqIXMUSBF6hZjQAiYrw/edit?gid=359685521#gid=359685521', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> CEO
     </a>
 
-    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/17KIedPOTqwBnzG_HwD309kV7CE7tyYmiKPnhdw4UQ0A/edit', true)">
-      📊 P. KINH DOANH
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/17KIedPOTqwBnzG_HwD309kV7CE7tyYmiKPnhdw4UQ0A/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. KINH DOANH
     </a>
 
-    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1oiRubZvntAFbWE6k1I4j9i_MxDtvvAkzvQCbFVmkcSM/edit', true)">
-      📊 P. NGHIỆP VỤ
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1oiRubZvntAFbWE6k1I4j9i_MxDtvvAkzvQCbFVmkcSM/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. NGHIỆP VỤ
     </a>
 
-    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1rvshmh9o8_sfzP4-uc1TwojMjRZIKX0HSUMn1MTV15E/edit', true)">
-      📊 P. TÀI CHÍNH
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1rvshmh9o8_sfzP4-uc1TwojMjRZIKX0HSUMn1MTV15E/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. TÀI CHÍNH
     </a>
 
-    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1Jz3Z3KttwClumWtLxm8zeM9mk88qESkSL4_b3iQJOto/edit', true)">
-      📊 P. SẢN PHẨM
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1Jz3Z3KttwClumWtLxm8zeM9mk88qESkSL4_b3iQJOto/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. SẢN PHẨM
     </a>
-
-    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1Gg-NvbgUEAogjSgxMK8dD0_8-QXyyjPdgqgAlSScrQw/edit', true)">
-      📊 P. KỸ THUẬT
+    
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1rlu3x1YmocJ5muYgOkSmH8K-LsTqxGy00OkXb06GWvw/edit?gid=73368914#gid=73368914', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> XUẤT-NHẬP-TỒN
+    </a>
+    
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1Gg-NvbgUEAogjSgxMK8dD0_8-QXyyjPdgqgAlSScrQw/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. KỸ THUẬT
+    </a>
+        <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1EHjje2nTqE7IEdO1uqOCFkK_PT7QM7LWd9LGNMDMwRA/edit?gid=1386834576#gid=1386834576', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> P. MARKETING
+    </a>
+        <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1w4QcCjz7uoXw2xkc4qK7lgZVDXYXAb2FIza1UJOyWIk/edit?gid=0#gid=0', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> z_Sale admin
+    </a>
+    <a onclick="loadApp('https://docs.google.com/spreadsheets/d/1oT6wxjjixPD3eiXqPfz3Dr8AWVj8Ifv-j_UJ6roeRZ4/edit?gid=272721618#gid=272721618', true)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg" alt="Google Sheets"> z_Cơ hội Mr. Toàn
     </a>
   </div>
+    
+  <div class="content" id="contentContainer">
+    <button class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()" aria-label="Ẩn/Hiện menu">&#9664;</button>
 
-  <!-- ========== CONTENT ========== -->
-  <div class="content">
-
-    <button class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()">&#9664;</button>
-
-    <!-- DASHBOARD (DEFAULT VIEW) -->
-    <div class="dashboard" id="dashboard">
-      <iframe
-        src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4dgjAlduhY0ccFkTWZocK-CtTbxBG8lgt1dAj0biK9F1YEirPdqbcxd0WRkSU_UTWWJrkxFRTEHX/pubchart?oid=1966049928&format=interactive"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+    <div class="welcome" id="welcomeScreen">
+      <img src="https://c1nguyendu.pgdcujut.edu.vn/wp-content/uploads/2022/07/nhung-hinh-nen-powerpoint-mo-dau-dep-va-an-tuong-nhat-670712.jpg" alt="Welcome Image">
+      <h2>Welcome to VITECO team 2025!</h2>
+      <p>Chọn một ứng dụng từ danh sách bên trái để bắt đầu làm việc.</p>
     </div>
 
-    <!-- APP IFRAME -->
-    <iframe id="appFrame"></iframe>
-
+    <iframe id="appFrame" src=""></iframe>
   </div>
 
-  <!-- ========== SCRIPT ========== -->
   <script>
     function loadApp(url, useIframe) {
-      const dashboard = document.getElementById('dashboard');
-      const frame = document.getElementById('appFrame');
+      // Ẩn màn hình welcome
+      document.getElementById('welcomeScreen').style.display = 'none';
 
+      const frame = document.getElementById('appFrame');
       if (useIframe) {
-        dashboard.style.display = 'none';
         frame.src = url;
         frame.style.display = 'block';
       } else {
@@ -213,9 +175,36 @@
       const sidebar = document.getElementById('sidebar');
       const btn = document.getElementById('toggleBtn');
       sidebar.classList.toggle('hidden');
-      btn.innerHTML = sidebar.classList.contains('hidden') ? '&#9654;' : '&#9664;';
-    }
-  </script>
+      const hidden = sidebar.classList.contains('hidden');
 
+      // Đổi biểu tượng mũi tên
+      btn.innerHTML = hidden ? '&#9654;' : '&#9664;';
+
+      // Ghi nhớ trạng thái (tùy chọn)
+      try { localStorage.setItem('viteco_sidebar_hidden', hidden ? '1' : '0'); } catch(e){}
+    }
+
+    // Khởi động: khôi phục trạng thái ẩn/hiện nếu có
+    (function initSidebarState(){
+      try {
+        const saved = localStorage.getItem('viteco_sidebar_hidden');
+        if (saved === '1') {
+          document.getElementById('sidebar').classList.add('hidden');
+          document.getElementById('toggleBtn').innerHTML = '&#9654;';
+        }
+      } catch(e){}
+    })();
+  </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
